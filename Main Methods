@@ -1,0 +1,31 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+public class Program { 
+
+public static void main(String[] args) {
+    ArrayList <Integer> playerOne = new ArrayList<>();
+    ArrayList <Integer> playerTwo = new ArrayList<>();
+ Scanner scan = new Scanner(System.in);
+
+ System.out.println("Enter name.");
+ String playerOneName = scan.nextLine();
+
+ System.out.println("Enter letter.");
+ String playerOneLetter = scan.nextLine();
+
+System.out.println("Enter move.");
+int playerOneMove = scan.nextInt();
+playerOne.add(playerOneMove);
+
+System.out.println("Enter player name");
+String playerTwoName = scan.nextLine();
+
+System.out.println("Enter letter.");
+String playerTwoLetter = scan.nextLine();
+
+System.out.println("Enter move.");
+int playerTwoMove = scan.nextInt();
+playerTwo.add(playerTwoMove);
+ scan.close();
+}
+}
