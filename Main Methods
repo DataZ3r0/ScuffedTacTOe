@@ -1,31 +1,86 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-public class Program { 
+public class Program4 { 
+String playerName;
+char playerLetter;
+
+static ArrayList <Integer> picksList;
+static Scanner scan = new Scanner(System.in);
+public Program4(String Name, char Letter, ArrayList <Integer> Picks) {
+   playerName = Name;
+   playerLetter = Letter;
+   picksList = Picks;
+}
+
+public String getName() {
+   return playerName;
+}
+
+public char getLetter() {
+   return playerLetter;
+}
+
+
+
 
 public static void main(String[] args) {
-    ArrayList <Integer> playerOne = new ArrayList<>();
-    ArrayList <Integer> playerTwo = new ArrayList<>();
- Scanner scan = new Scanner(System.in);
+   ArrayList <Integer> braydensList = new ArrayList<>();
+   ArrayList <Integer> rileysList = new ArrayList<>();
+Program4 Brayden = new Program4("Brayden", 'X', braydensList);
+Program4 Riley = new Program4("Tommy", 'O', rileysList);
 
- System.out.println("Enter name.");
- String playerOneName = scan.nextLine();
 
- System.out.println("Enter letter.");
- String playerOneLetter = scan.nextLine();
+System.out.println("Player 1: " + Brayden.getName());
+System.out.println("Player 2: " + Riley.getName());
 
-System.out.println("Enter move.");
-int playerOneMove = scan.nextInt();
-playerOne.add(playerOneMove);
+for(int i = 0; i < 5; i++) {
+   System.out.println(Brayden.getName()+"'s"+" "+"turn.");
+   int move = scan.nextInt();
+   System.out.println("Brayden has placed an " + Brayden.getLetter() + " " + "on" + " " + move + "." );
+   if(braydensList.contains(move)) {
+      System.out.println("Already chosen.");
+   }
+   if(rileysList.contains(move)) {
+      System.out.println("Already chosen.");
+   } else {
+      braydensList.add(move);
+   }
+   if(braydensList.contains(1) && braydensList.contains(5) && braydensList.contains(9) || braydensList.contains(2) && braydensList.contains(5) && braydensList.contains(8) || braydensList.contains(3) && braydensList.contains(6) && braydensList.contains(9) || braydensList.contains(1) && braydensList.contains(2) && braydensList.contains(3) || braydensList.contains(4) && braydensList.contains(5) && braydensList.contains(6) || braydensList.contains(7) && braydensList.contains(8) && braydensList.contains(9) || braydensList.contains(3) && braydensList.contains(5) && braydensList.contains(7)) {
+      System.out.println("Congratulations." + " " + Brayden.getName() + " " + "has won!");
+      System.out.println("These were " + Brayden.getName() + "'s numbers.");
+      for(int x = 0; x < braydensList.size(); x++) {
+         System.out.println(braydensList.get(x));
+      }
+      break;
+   } else {
+      
+      System.out.println(Riley.getName() + "'s turn.");
+      int moveTwo = scan.nextInt();
+      System.out.println(Riley.getName() + " " + "has placed an " + Riley.getLetter() + " " + "on " + moveTwo + ".");
+      if(rileysList.contains(moveTwo)) {
+         System.out.println("Already chosen.");
+      }
+      if(braydensList.contains(moveTwo)) {
+         System.out.println("Already chosen.");
+      } else {
+         rileysList.add(moveTwo);
+      }
+   }
+   if(rileysList.contains(1) && rileysList.contains(5) && rileysList.contains(9) || rileysList.contains(2) && rileysList.contains(5) && rileysList.contains(8) || rileysList.contains(3) && rileysList.contains(6) && rileysList.contains(9) || rileysList.contains(1) && rileysList.contains(2) && rileysList.contains(3) || rileysList.contains(4) && rileysList.contains(5) && rileysList.contains(6) || rileysList.contains(7) && rileysList.contains(8) && rileysList.contains(9) || rileysList.contains(3) && rileysList.contains(5) && rileysList.contains(7)) {
+      System.out.println("Congratulations." + " " + Riley.getName() + " " + "has won!");
+      System.out.println("These were " + Riley.getName() + " 's numbers.");
+      for(int y = 0; y < rileysList.size(); y++) {
+         System.out.println(rileysList.get(y));
+      }
+      break;
+   }
+}
+System.out.println("The game is now finished.");
 
-System.out.println("Enter player name");
-String playerTwoName = scan.nextLine();
-
-System.out.println("Enter letter.");
-String playerTwoLetter = scan.nextLine();
-
-System.out.println("Enter move.");
-int playerTwoMove = scan.nextInt();
-playerTwo.add(playerTwoMove);
- scan.close();
 }
 }
+
+
+
+  
+
