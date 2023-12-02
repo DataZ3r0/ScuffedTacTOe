@@ -1,6 +1,6 @@
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.ArrayList;
+
 public class Program {
  static String a; 
  static String b;
@@ -13,7 +13,41 @@ public class Program {
    Program myObj = new Program();
 HashMap <Integer, Integer > playerOne = new HashMap <Integer, Integer>();
 HashMap <Integer, Integer> playerTwo = new HashMap<>();
-ArrayList <Integer> winList = new ArrayList<>();
+
+HashMap <Integer, Integer> optionOne = new HashMap<>();
+optionOne.put(1, null);
+optionOne.put(5, null);
+optionOne.put(9, null);
+
+HashMap <Integer, Integer> optionTwo = new HashMap<>();
+optionTwo.put(2, null);
+optionTwo.put(5, null);
+optionTwo.put(8, null);
+
+HashMap <Integer, Integer> optionThree = new HashMap<>();
+optionThree.put(3, null);
+optionThree.put(6, null);
+optionThree.put(9, null);
+
+HashMap <Integer, Integer> optionFour = new HashMap<>();
+optionFour.put(1, null);
+optionFour.put(2, null);
+optionFour.put(3, null);
+
+HashMap <Integer, Integer> optionFive = new HashMap<>();
+optionFive.put(4, null);
+optionFive.put(5, null);
+optionFive.put(6, null);
+
+HashMap <Integer, Integer> optionSix = new HashMap<>();
+optionSix.put(7, null);
+optionSix.put(8, null);
+optionSix.put(9, null);
+
+HashMap <Integer, Integer> optionSeven = new HashMap<>();
+optionSeven.put(3, null);
+optionSeven.put(5, null);
+optionSeven.put(7, null);
    
 
 System.out.println("Player 1 - Enter name.");
@@ -29,6 +63,32 @@ System.out.println("Player 2 - Enter letter.");
 d = scan.nextLine();
 
 for(int i = 0; i < 5; i++) {
+  if(i == 4) {
+    System.out.println(Program.a + "'s turn.");
+    int moveThree = scan.nextInt();
+    if(playerOne.containsKey(moveThree)) {
+      System.out.println("Already chosen.");
+    }
+    if(playerTwo.containsKey(moveThree)) {
+      System.out.println("Already chosen.");
+    } else {
+      playerOne.put(moveThree, null);
+    }
+    if(playerOne.containsKey(1) && playerOne.containsKey(5) && playerOne.containsKey(9) || playerOne.containsKey(2) && playerOne.containsKey(5) && playerOne.containsKey(8) || playerOne.containsKey(3) && playerOne.containsKey(6) && playerOne.containsKey(9) || playerOne.containsKey(1) && playerOne.containsKey(2) && playerOne.containsKey(3) || playerOne.containsKey(4) && playerOne.containsKey(5) && playerOne.containsKey(6) || playerOne.containsKey(7) && playerOne.containsKey(8) && playerOne.containsKey(9) || playerOne.containsKey(3) && playerOne.containsKey(5) && playerOne.containsKey(7)) {
+  System.out.println("Congratulations. " + Program.a + " has won!");
+  System.out.println("These were " + Program.a + "'s numbers.");
+  for(int y : playerOne.keySet()) {
+  System.out.println(y);
+  
+  }
+  System.out.println("The game is now finished.");
+  break;
+  }
+  if(!playerOne.equals(optionOne) || !playerOne.equals(optionTwo) || !playerOne.equals(optionThree) || !playerOne.equals(optionFour) || !playerOne.equals(optionFive) || !playerOne.equals(optionSix) || !playerOne.equals(optionSeven)) {
+System.out.println("The game is finished. Nobody won.");
+break;
+  }
+}
   System.out.println(Program.a + "'s turn.");
   int move = scan.nextInt();
   System.out.println(Program.a + " has placed an " + Program.c + " on " + move + ".");
@@ -46,7 +106,6 @@ System.out.println("These were " + Program.a + "'s numbers.");
 for(int y : playerOne.keySet()) {
 System.out.println(y);
 
-winList.add(1);
 
 }
 System.out.println("The game is now finished.");
@@ -69,20 +128,69 @@ if(playerTwo.containsKey(1) && playerTwo.containsKey(5) && playerTwo.containsKey
   System.out.println("These were " + Program.b + "'s numbers.");
   for(int k : playerTwo.keySet()) {
     System.out.println(k);
-    winList.add(1);
   }
   break;
 }
   
 }
 
-
-if(winList.contains(1)) {
-
-} else {
-  System.out.println("The game is over. Nobody won.");
-}
 scan.close();
 
 }
 }
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
