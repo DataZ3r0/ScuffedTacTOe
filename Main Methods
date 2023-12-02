@@ -1,86 +1,88 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
-public class Program4 { 
-String playerName;
-char playerLetter;
+import java.util.ArrayList;
+public class Program {
+ static String a; 
+ static String b;
+ static String c;
+ static String d;
+ static Scanner scan = new Scanner(System.in);
+  
+ 
+  public static void main(String[] args) {
+   Program myObj = new Program();
+HashMap <Integer, Integer > playerOne = new HashMap <Integer, Integer>();
+HashMap <Integer, Integer> playerTwo = new HashMap<>();
+ArrayList <Integer> winList = new ArrayList<>();
+   
 
-static ArrayList <Integer> picksList;
-static Scanner scan = new Scanner(System.in);
-public Program4(String Name, char Letter, ArrayList <Integer> Picks) {
-   playerName = Name;
-   playerLetter = Letter;
-   picksList = Picks;
-}
+System.out.println("Player 1 - Enter name.");
+a = scan.nextLine();
 
-public String getName() {
-   return playerName;
-}
+System.out.println("Player 2 - Enter name.");
+b = scan.nextLine();
 
-public char getLetter() {
-   return playerLetter;
-}
+System.out.println("Player 1 - Enter letter.");
+c = scan.nextLine();
 
-
-
-
-public static void main(String[] args) {
-   ArrayList <Integer> braydensList = new ArrayList<>();
-   ArrayList <Integer> rileysList = new ArrayList<>();
-Program4 Brayden = new Program4("Brayden", 'X', braydensList);
-Program4 Riley = new Program4("Tommy", 'O', rileysList);
-
-
-System.out.println("Player 1: " + Brayden.getName());
-System.out.println("Player 2: " + Riley.getName());
+System.out.println("Player 2 - Enter letter.");
+d = scan.nextLine();
 
 for(int i = 0; i < 5; i++) {
-   System.out.println(Brayden.getName()+"'s"+" "+"turn.");
-   int move = scan.nextInt();
-   System.out.println("Brayden has placed an " + Brayden.getLetter() + " " + "on" + " " + move + "." );
-   if(braydensList.contains(move)) {
-      System.out.println("Already chosen.");
-   }
-   if(rileysList.contains(move)) {
-      System.out.println("Already chosen.");
-   } else {
-      braydensList.add(move);
-   }
-   if(braydensList.contains(1) && braydensList.contains(5) && braydensList.contains(9) || braydensList.contains(2) && braydensList.contains(5) && braydensList.contains(8) || braydensList.contains(3) && braydensList.contains(6) && braydensList.contains(9) || braydensList.contains(1) && braydensList.contains(2) && braydensList.contains(3) || braydensList.contains(4) && braydensList.contains(5) && braydensList.contains(6) || braydensList.contains(7) && braydensList.contains(8) && braydensList.contains(9) || braydensList.contains(3) && braydensList.contains(5) && braydensList.contains(7)) {
-      System.out.println("Congratulations." + " " + Brayden.getName() + " " + "has won!");
-      System.out.println("These were " + Brayden.getName() + "'s numbers.");
-      for(int x = 0; x < braydensList.size(); x++) {
-         System.out.println(braydensList.get(x));
-      }
-      break;
-   } else {
-      
-      System.out.println(Riley.getName() + "'s turn.");
-      int moveTwo = scan.nextInt();
-      System.out.println(Riley.getName() + " " + "has placed an " + Riley.getLetter() + " " + "on " + moveTwo + ".");
-      if(rileysList.contains(moveTwo)) {
-         System.out.println("Already chosen.");
-      }
-      if(braydensList.contains(moveTwo)) {
-         System.out.println("Already chosen.");
-      } else {
-         rileysList.add(moveTwo);
-      }
-   }
-   if(rileysList.contains(1) && rileysList.contains(5) && rileysList.contains(9) || rileysList.contains(2) && rileysList.contains(5) && rileysList.contains(8) || rileysList.contains(3) && rileysList.contains(6) && rileysList.contains(9) || rileysList.contains(1) && rileysList.contains(2) && rileysList.contains(3) || rileysList.contains(4) && rileysList.contains(5) && rileysList.contains(6) || rileysList.contains(7) && rileysList.contains(8) && rileysList.contains(9) || rileysList.contains(3) && rileysList.contains(5) && rileysList.contains(7)) {
-      System.out.println("Congratulations." + " " + Riley.getName() + " " + "has won!");
-      System.out.println("These were " + Riley.getName() + " 's numbers.");
-      for(int y = 0; y < rileysList.size(); y++) {
-         System.out.println(rileysList.get(y));
-      }
-      break;
-   }
+  System.out.println(Program.a + "'s turn.");
+  int move = scan.nextInt();
+  System.out.println(Program.a + " has placed an " + Program.c + " on " + move + ".");
+  if(playerOne.containsKey(move)) {
+    System.out.println("Already chosen.");
+  }
+  if(playerTwo.containsKey(move)) {
+    System.out.println("Already chosen.");
+  } else {
+    playerOne.put(move, null);
+  }
+  if(playerOne.containsKey(1) && playerOne.containsKey(5) && playerOne.containsKey(9) || playerOne.containsKey(2) && playerOne.containsKey(5) && playerOne.containsKey(8) || playerOne.containsKey(3) && playerOne.containsKey(6) && playerOne.containsKey(9) || playerOne.containsKey(1) && playerOne.containsKey(2) && playerOne.containsKey(3) || playerOne.containsKey(4) && playerOne.containsKey(5) && playerOne.containsKey(6) || playerOne.containsKey(7) && playerOne.containsKey(8) && playerOne.containsKey(9) || playerOne.containsKey(3) && playerOne.containsKey(5) && playerOne.containsKey(7)) {
+System.out.println("Congratulations. " + Program.a + " has won!");
+System.out.println("These were " + Program.a + "'s numbers.");
+for(int y : playerOne.keySet()) {
+System.out.println(y);
+
+winList.add(1);
+
 }
 System.out.println("The game is now finished.");
-
+break;
+} else {
+System.out.println(Program.b + "'s turn.");
+int moveTwo = scan.nextInt();
+System.out.println(Program.b + " has placed an " + Program.d + " on " + moveTwo + ".");
+if(playerOne.containsKey(moveTwo)) {
+  System.out.println("Already chosen.");
+}
+if(playerTwo.containsKey(moveTwo)) {
+  System.out.println("Already chosen.");
+} else {
+  playerTwo.put(moveTwo, null);
 }
 }
-
-
-
+if(playerTwo.containsKey(1) && playerTwo.containsKey(5) && playerTwo.containsKey(9) || playerTwo.containsKey(2) && playerTwo.containsKey(5) && playerTwo.containsKey(8) || playerTwo.containsKey(3) && playerTwo.containsKey(6) && playerTwo.containsKey(9) || playerTwo.containsKey(1) && playerTwo.containsKey(2) && playerTwo.containsKey(3) || playerTwo.containsKey(4) && playerTwo.containsKey(5) && playerTwo.containsKey(6) || playerTwo.containsKey(7) && playerTwo.containsKey(8) && playerTwo.containsKey(9) || playerTwo.containsKey(3) && playerTwo.containsKey(5) && playerTwo.containsKey(7)) {
+  System.out.println("Congratulations. " + Program.b + " has won!");
+  System.out.println("These were " + Program.b + "'s numbers.");
+  for(int k : playerTwo.keySet()) {
+    System.out.println(k);
+    winList.add(1);
+  }
+  break;
+}
   
+}
 
+
+if(winList.contains(1)) {
+
+} else {
+  System.out.println("The game is over. Nobody won.");
+}
+scan.close();
+
+}
+}
