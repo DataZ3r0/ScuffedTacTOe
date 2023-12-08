@@ -1,16 +1,23 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-public class Program {
+public class Program3 {
     static Scanner scan = new Scanner(System.in);
-    static Program myObj = new Program();
+    static Program3 myProgram3 = new Program3();
+    
 
     static String a;
     static String b;
     static String c;
     static String d;
+    static String e;
+    static String f;
+    static String g;
+    static String h;
 
     static ArrayList <Integer> playerOne = new ArrayList<>();
     static ArrayList <Integer> playerTwo = new ArrayList<>();
+    static ArrayList <Boolean> checkListOne = new ArrayList<>();
+    static ArrayList <Boolean> checkListTwo = new ArrayList<>();
 
     static int moveOne;
     static int moveTwo;
@@ -18,7 +25,70 @@ public class Program {
     static String sOne;
     static String sTwo;
 
+    public void runGame() {
+        for(int i = 0; i < 5; i++) {
+          System.out.println();
+        e = scan.nextLine();
+        System.out.println("If you want, you can change your name.");
+        f = scan.nextLine();
+        if(f.contains("Yes")) {
+        myProgram3.playerOneName();
+        }
+        if(f.contains("No")) {
+            System.out.println("Ok.");
+        }
+          myProgram3.getInputsOne();
+          if(i == 0) {
+            myProgram3.addInputOne();
+          }
+          myProgram3.validInput();
+          if(i >= 1) { 
+            myProgram3.openSpaceOne();
+          }
+          myProgram3.checkWinnerOne();
+          if(checkListOne.contains(true)) {
+            System.out.println(myProgram3.getNameOne() + " has won.");
+            System.out.println("These were " + myProgram3.getNameOne() + "'s numbers.");
+            for(int y = 0; y < playerOne.size(); y++) {
+                System.out.println(playerOne.get(y));
+            }
+            break;
+          }
+          if(i == 4 && !checkListOne.contains(true)) {
+            System.out.println("The game is now over. Nobody won.");
+            break;
+          }
+          System.out.println();
+        g = scan.nextLine();
+        System.out.println("If you want, you can change your name.");
+        h = scan.nextLine();
+        if(h.contains("Yes")) {
+            myProgram3.playerTwoName();
+        }
+        if(h.contains("No")) {
+            System.out.println("Ok.");
+        }
+          myProgram3.getInputsTwo();
+          if(i == 0) {
+            myProgram3.addInputTwo();
+          }
+          myProgram3.validInput();
+          if(i >= 1) {
+            myProgram3.openSpaceTwo();
+          }
+          myProgram3.checkWinnerTwo();
+          if(checkListTwo.contains(true)) {
+            System.out.println(myProgram3.getNameTwo() + " has won.");
+            System.out.println("These were " + myProgram3.getNameTwo() + "'s numbers.");
+            for(int z = 0; z < playerTwo.size(); z++) {
+                System.out.println(playerTwo.get(z));
+            }
+            break;
+          }  
+        }
+    }
 
+    
     public void playerOneName() {
         System.out.println("Player 1 - Enter name.");
      a = scan.nextLine();
@@ -37,41 +107,43 @@ public class Program {
       d = scan.nextLine();
     }
 
-    public void changeName() {
-        myObj.playerOneName();
-    }
-
 
     public void getInputsOne() {
-        System.out.println("Player 1- Enter move input.");
+        System.out.println("Player 1 - Enter move input.");
          moveOne = scan.nextInt();
-        myObj.openSpaceOne();
+        
     }
 
     public void getInputsTwo() {
         System.out.println("Player 2 - Enter move input.");
         moveTwo = scan.nextInt();
-        myObj.openSpaceTwo();
+        
     }
 
     public void openSpaceOne() {
+        System.out.println(myProgram3.getNameOne() + " has placed an " + myProgram3.getLetterOne() + " on " + moveOne + ".");
         if(playerTwo.contains(moveOne) || playerOne.contains(moveOne)) {
             System.out.println("Space is not open.");
-        } else {
+        } 
+        if(!playerTwo.contains(moveOne) || !playerOne.contains(moveOne)) {
             playerOne.add(moveOne);
         }
     }
 
     public void openSpaceTwo() {
+        System.out.println(myProgram3.getNameTwo() + " has placed an " + myProgram3.getLetterTwo() + " on " + moveTwo + ".");
         if(playerOne.contains(moveTwo) || playerTwo.contains(moveTwo)) {
             System.out.println("Space is not open.");
+        }
+        if(!playerTwo.contains(moveOne) || !playerOne.contains(moveOne)) {
+            playerTwo.add(moveTwo);
         }
         
     }
 
 
     public void validInput() {
-        if(moveOne > 9 || moveTwo > 11 ) {
+        if(moveOne > 9 || moveTwo > 9 ) {
             System.out.println("Invalid input.");
         } else {
             System.out.println("Input is valid.");
@@ -112,27 +184,54 @@ public class Program {
         return b;
     }
 
+    public String getLetterOne() { 
+        return c;
+    }
+
+    public String getLetterTwo() {
+        return d;
+    }
+
     public void checkWinnerOne() {
         if(playerOne.contains(1) && playerOne.contains(5) && playerOne.contains(9) || playerOne.contains(2) && playerOne.contains(5) && playerOne.contains(8) || playerOne.contains(3) && playerOne.contains(6) && playerOne.contains(9) || playerOne.contains(1) && playerOne.contains(2) && playerOne.contains(3) || playerOne.contains(4) && playerOne.contains(5) && playerOne.contains(6) || playerOne.contains(7) && playerOne.contains(8) && playerOne.contains(9) || playerOne.contains(3) && playerOne.contains(5) && playerOne.contains(7)) {
-            System.out.println(myObj.getNameOne() + " has won.");
+            checkListOne.add(true);
         }
     }
 
     public void checkWinnerTwo() {
         if(playerTwo.contains(1) && playerTwo.contains(5) && playerTwo.contains(9) || playerTwo.contains(2) && playerTwo.contains(5) && playerTwo.contains(8) || playerTwo.contains(3) && playerTwo.contains(6) && playerTwo.contains(9) || playerTwo.contains(1) && playerTwo.contains(2) && playerTwo.contains(3) || playerTwo.contains(4) && playerTwo.contains(5) && playerTwo.contains(6) || playerTwo.contains(7) && playerTwo.contains(8) && playerTwo.contains(9) || playerTwo.contains(3) && playerTwo.contains(5) && playerTwo.contains(7)) {
-            System.out.println(myObj.getNameTwo() + " has won.");
+           checkListTwo.add(true); 
+        
         }
     }
 
+    public void addInputOne() {
+            System.out.println(myProgram3.getNameOne() + " has placed an " + myProgram3.getLetterOne() + " on " + moveOne);
+            playerOne.add(moveOne);
+        
+    }
 
+    public void addInputTwo() {
+            System.out.println(myProgram3.getNameTwo() + "  has placed an " + myProgram3.getLetterTwo() + " on " + moveTwo);
+            playerTwo.add(moveTwo);
+        
+    }
 
-    public static void main(String[] args) {
-    myObj.playerOneName();
-    System.out.println(myObj.getNameOne());
-    myObj.getInputsOne();
-    myObj.validInput();
+    public void getGameGoing() {
+        myProgram3.playerOneName();
+        myProgram3.playerTwoName();
+        myProgram3.playerLetters();
+        myProgram3.runGame();
+        
+    }
+}
+
+    
     
 
+
+ public static void main(String[] args) {
+   
 
     }
 }
