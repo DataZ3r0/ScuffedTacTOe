@@ -1,23 +1,20 @@
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
-public class Program3 {
-    static Scanner scan = new Scanner(System.in);
-    static Program3 myProgram3 = new Program3();
-    
+public class File {
+    String[] arr1 = {" " , " " , " "};
+    String[] arr2 = {" " , " " , " "};
+    String[] arr3 = {" " , " " , " "};
+
+static ArrayList <Boolean> checkList1 = new ArrayList<>();
+static ArrayList <Boolean> checkList2 = new ArrayList<>();
+static Scanner scan = new Scanner(System.in);
+static File myFile = new File();
 
     static String a;
     static String b;
     static String c;
     static String d;
-    static String e;
-    static String f;
-    static String g;
-    static String h;
-
-    static ArrayList <Integer> playerOne = new ArrayList<>();
-    static ArrayList <Integer> playerTwo = new ArrayList<>();
-    static ArrayList <Boolean> checkListOne = new ArrayList<>();
-    static ArrayList <Boolean> checkListTwo = new ArrayList<>();
 
     static int moveOne;
     static int moveTwo;
@@ -25,213 +22,434 @@ public class Program3 {
     static String sOne;
     static String sTwo;
 
-    public void runGame() {
-        for(int i = 0; i < 5; i++) {
-          System.out.println();
-        e = scan.nextLine();
-        System.out.println("If you want, you can change your name.");
-        f = scan.nextLine();
-        if(f.contains("Yes")) {
-        myProgram3.playerOneName();
-        }
-        if(f.contains("No")) {
-            System.out.println("Ok.");
-        }
-          myProgram3.getInputsOne();
-          if(i == 0) {
-            myProgram3.addInputOne();
-          }
-          myProgram3.validInput();
-          if(i >= 1) { 
-            myProgram3.openSpaceOne();
-          }
-          myProgram3.checkWinnerOne();
-          if(checkListOne.contains(true)) {
-            System.out.println(myProgram3.getNameOne() + " has won.");
-            System.out.println("These were " + myProgram3.getNameOne() + "'s numbers.");
-            for(int y = 0; y < playerOne.size(); y++) {
-                System.out.println(playerOne.get(y));
-            }
-            break;
-          }
-          if(i == 4 && !checkListOne.contains(true)) {
-            System.out.println("The game is now over. Nobody won.");
-            break;
-          }
-          System.out.println();
-        g = scan.nextLine();
-        System.out.println("If you want, you can change your name.");
-        h = scan.nextLine();
-        if(h.contains("Yes")) {
-            myProgram3.playerTwoName();
-        }
-        if(h.contains("No")) {
-            System.out.println("Ok.");
-        }
-          myProgram3.getInputsTwo();
-          if(i == 0) {
-            myProgram3.addInputTwo();
-          }
-          myProgram3.validInput();
-          if(i >= 1) {
-            myProgram3.openSpaceTwo();
-          }
-          myProgram3.checkWinnerTwo();
-          if(checkListTwo.contains(true)) {
-            System.out.println(myProgram3.getNameTwo() + " has won.");
-            System.out.println("These were " + myProgram3.getNameTwo() + "'s numbers.");
-            for(int z = 0; z < playerTwo.size(); z++) {
-                System.out.println(playerTwo.get(z));
-            }
-            break;
-          }  
-        }
-    }
-
+    static String k;
     
-    public void playerOneName() {
-        System.out.println("Player 1 - Enter name.");
-     a = scan.nextLine();
-    }
 
-    public void playerTwoName() {
-        System.out.println("Player 2 - Enter name.");
-     b = scan.nextLine();
-    }
+    public void getGameGoing() {
+        for(int i = 0; i < 5; i++) {
+            
+        if(i == 0) {
+            myFile.getPlayer1Name();
+            myFile.getPlayer2Name();
+        myFile.getPlayer1Letter();
+        myFile.getPlayer2Letter();
+        }
 
-    public void playerLetters() {
-        System.out.println("Player 1 - Enter letter.");
-     c = scan.nextLine();
+        myFile.justSkip();
+        myFile.changePlayer1Name();
+        myFile.getBoard();
+        myFile.getPlayer1Input();
+        myFile.getPlayer1Valid();
+        myFile.checkPlayer1Space();
 
-    System.out.println("Player 2 - Enter letter.");
-      d = scan.nextLine();
-    }
-
-
-    public void getInputsOne() {
-        System.out.println("Player 1 - Enter move input.");
-         moveOne = scan.nextInt();
+        if(i == 4) {
+            if(!checkList1.contains(true) && !checkList2.contains(true)) {
+                System.out.println("The game is over. Nobody won.");
+                myFile.getBoard();
+                break;
+            }
+        }
         
-    }
-
-    public void getInputsTwo() {
-        System.out.println("Player 2 - Enter move input.");
-        moveTwo = scan.nextInt();
+        if(i >= 1) {
+        myFile.checkWinner1();
+        if(checkList1.contains(true)) {
+                break;
+            }
+        }
         
-    }
 
-    public void openSpaceOne() {
-        System.out.println(myProgram3.getNameOne() + " has placed an " + myProgram3.getLetterOne() + " on " + moveOne + ".");
-        if(playerTwo.contains(moveOne) || playerOne.contains(moveOne)) {
-            System.out.println("Space is not open.");
-        } 
-        if(!playerTwo.contains(moveOne) || !playerOne.contains(moveOne)) {
-            playerOne.add(moveOne);
+        myFile.justSkip();
+        myFile.changePlayer2Name();
+        myFile.getBoard();
+        myFile.getPlayer2Input();
+        myFile.getPlayer2Valid();
+        myFile.checkPlayer2Space();
+        
+        
+        if(i >= 1) {  
+            myFile.checkWinner2();
+            if(checkList2.contains(true)) {
+                break;
+            }
+        }
+        
+
         }
     }
 
-    public void openSpaceTwo() {
-        System.out.println(myProgram3.getNameTwo() + " has placed an " + myProgram3.getLetterTwo() + " on " + moveTwo + ".");
-        if(playerOne.contains(moveTwo) || playerTwo.contains(moveTwo)) {
-            System.out.println("Space is not open.");
+    public void addPlayer1Input() {
+        switch(moveOne) {
+            case 1:
+            arr1[0] = myFile.getLetter1();
+            break;
+            case 2:
+            arr1[1] = myFile.getLetter1();
+            break;
+            case 3:
+            arr1[2] = myFile.getLetter1();
+            case 4:
+            arr2[0] = myFile.getLetter1();
+            break;
+            case 5:
+            arr2[1] = myFile.getLetter1();
+            break;
+            case 6:
+            arr2[2] = myFile.getLetter1();
+            break;
+            case 7:
+            arr3[0] = myFile.getLetter1();
+            break;
+            case 8:
+            arr3[1] = myFile.getLetter1();
+            break;
+            case 9:
+            arr3[2] = myFile.getLetter1();
+            break;
         }
-        if(!playerTwo.contains(moveOne) || !playerOne.contains(moveOne)) {
-            playerTwo.add(moveTwo);
-        }
-        
     }
 
-
-    public void validInput() {
-        if(moveOne > 9 || moveTwo > 9 ) {
-            System.out.println("Invalid input.");
-        } else {
-            System.out.println("Input is valid.");
+    public void addPlayer2Input() {
+        switch(moveTwo) {
+            case 1:
+            if(arr1[0] != myFile.getLetter1()) {
+                arr1[0] = myFile.getLetter2();
+            }
+            break;
+            case 2:
+            if(arr1[1] != myFile.getLetter1()) {
+                arr1[1] = myFile.getLetter2();
+            }
+            break;
+            case 3:
+            if(arr1[2] != myFile.getLetter1()) {
+                arr1[2] = myFile.getLetter2();
+            }
+            break;
+            case 4:
+            if(arr2[0] != myFile.getLetter1()) {
+                arr2[0] = myFile.getLetter2();
+            }
+            break;
+            case 5:
+            if(arr2[1] != myFile.getLetter1()) {
+                arr2[1] = myFile.getLetter2();
+            }
+            break;
+            case 6:
+            if(arr2[2] != myFile.getLetter1()) {
+                arr2[2] = myFile.getLetter2();
+            }
+            break;
+            case 7:
+            if(arr3[0] != myFile.getLetter1()) {
+                arr3[0] = myFile.getLetter2();
+            }
+            break;
+            case 8:
+            if(arr3[1] != myFile.getLetter1()) {
+                arr3[1] = myFile.getLetter2();
+            }
+            break;
+            case 9:
+            if(arr3[2] != myFile.getLetter1()) {
+                arr3[2] = myFile.getLetter2();
+            }
+            break;
         }
-        
     }
 
-    public void switchLetterOne() {
-        System.out.println("If you want you can switch your letter.");
-         sOne = scan.nextLine();
-        
+    public void justSkip() {
+        System.out.println("");
+        k = scan.nextLine();
+    }
+
+    public void getPlayer1Name() {
+        System.out.println("Player 1 - Enter name");
+        a = scan.nextLine();
+    }
+
+    public void getPlayer2Name() {
+        System.out.println("Player 2 - Enter name");
+        b = scan.nextLine();
+    }
+
+    public void getPlayer1Letter() {
+        System.out.println("Player 1 - Enter letter");
+        c = scan.nextLine();
+    }
+
+    public void getPlayer2Letter() {
+        System.out.println("Player 2 - Enter letter.");
+        d = scan.nextLine();
+    }
+
+    public void changePlayer1Name() {
+        System.out.println("If you want, you can change your name. ");
+        sOne = scan.nextLine();
         if(sOne.contains("Yes")) {
-            System.out.println("Enter letter.");
-            c = scan.nextLine();
+            myFile.getPlayer1Name();
         }
         if(sOne.contains("No")) {
-            System.out.println("Ok.");
+            System.out.println("Ok");
         }
     }
 
-    public void switchLetterTwo() {
-        System.out.println("If you want, you can switch your letter.");
+    public void changePlayer2Name() {
+        System.out.println("If you want, you can change your name.");
         sTwo = scan.nextLine();
         if(sTwo.contains("Yes")) {
-            System.out.println("Enter letter.");
-            d = scan.nextLine();
+            myFile.getPlayer2Name();
         }
         if(sTwo.contains("No")) {
             System.out.println("Ok.");
         }
     }
 
-    public String getNameOne() {
+    public void getPlayer1Input() {
+        System.out.println("Player 1 - Enter number input.");
+        moveOne = scan.nextInt();
+        
+    }
+
+    public void getPlayer2Input() {
+        System.out.println("Player 2 - Enter number input.");
+        moveTwo = scan.nextInt();
+    }
+
+    public String getName1() {
         return a;
     }
 
-    public String getNameTwo() {
+    public String getName2() {
         return b;
     }
 
-    public String getLetterOne() { 
+    public String getLetter1() {
         return c;
     }
 
-    public String getLetterTwo() {
+    public String getLetter2() {
         return d;
     }
 
-    public void checkWinnerOne() {
-        if(playerOne.contains(1) && playerOne.contains(5) && playerOne.contains(9) || playerOne.contains(2) && playerOne.contains(5) && playerOne.contains(8) || playerOne.contains(3) && playerOne.contains(6) && playerOne.contains(9) || playerOne.contains(1) && playerOne.contains(2) && playerOne.contains(3) || playerOne.contains(4) && playerOne.contains(5) && playerOne.contains(6) || playerOne.contains(7) && playerOne.contains(8) && playerOne.contains(9) || playerOne.contains(3) && playerOne.contains(5) && playerOne.contains(7)) {
-            checkListOne.add(true);
+
+    public void getBoard() {
+        System.out.println(Arrays.toString(arr1));
+        System.out.println(Arrays.toString(arr2));
+        System.out.println(Arrays.toString(arr3));
+        
+    }
+
+    public void getPlayer1Valid() {
+        if(moveOne > 9) {
+            System.out.println("Invalid input.");
+        } else {
+            System.out.println("Input is valid.");
         }
     }
 
-    public void checkWinnerTwo() {
-        if(playerTwo.contains(1) && playerTwo.contains(5) && playerTwo.contains(9) || playerTwo.contains(2) && playerTwo.contains(5) && playerTwo.contains(8) || playerTwo.contains(3) && playerTwo.contains(6) && playerTwo.contains(9) || playerTwo.contains(1) && playerTwo.contains(2) && playerTwo.contains(3) || playerTwo.contains(4) && playerTwo.contains(5) && playerTwo.contains(6) || playerTwo.contains(7) && playerTwo.contains(8) && playerTwo.contains(9) || playerTwo.contains(3) && playerTwo.contains(5) && playerTwo.contains(7)) {
-           checkListTwo.add(true); 
-        
+    public void getPlayer2Valid() {
+        if(moveTwo > 9) {
+        System.out.println("Invalid input.");
+        } else {
+            System.out.println("Input is valid.");
         }
     }
 
-    public void addInputOne() {
-            System.out.println(myProgram3.getNameOne() + " has placed an " + myProgram3.getLetterOne() + " on " + moveOne);
-            playerOne.add(moveOne);
-        
+    public void checkWinner1() {
+        if(arr1[0] == myFile.getLetter1() && arr1[1] == myFile.getLetter1() && arr1[2] == myFile.getLetter1() || arr2[0] == myFile.getLetter1() && arr2[1] == myFile.getLetter1() && arr2[2] ==  myFile.getLetter1() || arr3[0] == myFile.getLetter1() && arr3[1] == myFile.getLetter1() && arr3[2] == myFile.getLetter1() || arr1[0] == myFile.getLetter1() && arr2[1] == myFile.getLetter1() && arr3[2] == myFile.getLetter1() || arr1[2] == myFile.getLetter1() && arr2[1] == myFile.getLetter1() && arr3[0] == myFile.getLetter1() || arr1[0] == myFile.getLetter1() && arr2[0] ==  myFile.getLetter1() && arr3[0] == myFile.getLetter1() || arr1[2] == myFile.getLetter1() && arr2[2] ==  myFile.getLetter1() && arr3[2] ==  myFile.getLetter1() || arr1[1] == myFile.getLetter1() && arr2[1] == myFile.getLetter1() && arr3[1] == myFile.getLetter1() ) {
+            System.out.println(myFile.getName1() + " has won.");
+            myFile.getBoard();
+            checkList1.add(true);
+        }
     }
 
-    public void addInputTwo() {
-            System.out.println(myProgram3.getNameTwo() + "  has placed an " + myProgram3.getLetterTwo() + " on " + moveTwo);
-            playerTwo.add(moveTwo);
-        
+    public void checkWinner2() {
+        if(arr1[0] == myFile.getLetter2() && arr1[1] == myFile.getLetter2() && arr1[2] == myFile.getLetter2() || arr2[0] == myFile.getLetter2() && arr2[1] == myFile.getLetter2() && arr2[2] ==  myFile.getLetter2() || arr3[0] == myFile.getLetter2() && arr3[1] == myFile.getLetter2() && arr3[2] == myFile.getLetter2() || arr1[0] == myFile.getLetter2() && arr2[1] == myFile.getLetter2() && arr3[2] == myFile.getLetter2() || arr1[2] == myFile.getLetter2() && arr2[1] == myFile.getLetter2() && arr3[0] == myFile.getLetter2() || arr1[0] == myFile.getLetter2() && arr2[0] ==  myFile.getLetter2() && arr3[0] == myFile.getLetter2() || arr1[2] == myFile.getLetter2() && arr2[2] ==  myFile.getLetter2() && arr3[2] ==  myFile.getLetter2() || arr1[1] == myFile.getLetter2() && arr2[1] ==  myFile.getLetter2() && arr3[1] ==  myFile.getLetter2() ) {
+            System.out.println(myFile.getName2() + " has won.");
+            myFile.getBoard();
+            checkList2.add(true);
+        }
     }
-
-    public void getGameGoing() {
-        myProgram3.playerOneName();
-        myProgram3.playerTwoName();
-        myProgram3.playerLetters();
-        myProgram3.runGame();
-        
-    }
-}
 
     
-    
+
+    public void checkPlayer1Space() {
+        switch(moveOne) {
+            case 1:
+            if(arr1[0].contains("X") || arr1[0].contains("O")) {
+                System.out.println("Space is taken.");
+            } 
+            if(!arr1[0].contains("X") && !arr1[0].contains("O")) {
+                System.out.println(myFile.getName1() + " has placed an " + myFile.getLetter1() + " on " + moveOne);
+            arr1[0] = myFile.getLetter1();
+            }
+            break;  
+            case 2:
+            if(arr1[1].contains("X") || arr1[1].contains("O")) {
+                System.out.println("Space is taken.");
+            } 
+            if(!arr1[1].contains("X") && !arr1[1].contains("O")) {
+                System.out.println(myFile.getName1() + " has placed an " + myFile.getLetter1() + " on " + moveOne);
+                arr1[1] = myFile.getLetter1();
+            }
+            break;
+            case 3:
+            if(arr1[2].contains("X") || arr1[2].contains("O")) {
+                System.out.println("Space is taken.");
+            } 
+            if(!arr1[2].contains("X") && !arr1[2].contains("O")) {
+                System.out.println(myFile.getName1() + " has placed an " + myFile.getLetter1() + " on " + moveOne);
+                arr1[2] = myFile.getLetter1();
+            }
+            break;
+            case 4:
+            if(arr2[0].contains("X") || arr2[0].contains("O")) {
+                System.out.println("Space is taken.");
+            } 
+            if(!arr2[0].contains("X") && !arr2[0].contains("O")) {
+                System.out.println(myFile.getName1() + " has placed an " + myFile.getLetter1() + " on " + moveOne);
+                arr2[0] = myFile.getLetter1();
+            }
+            break;
+            case 5:
+            if(arr2[1].contains("X") || arr2[1].contains("O")) {
+                System.out.println("Space is taken.");
+            } 
+            if(!arr2[1].contains("X") && !arr2[1].contains("O")) {
+                System.out.println(myFile.getName1() + " has placed an " + myFile.getLetter1() + " on " + moveOne);
+                arr2[1] = myFile.getLetter1();
+            }
+            break;
+            
+            case 6:
+            if(arr2[2].contains("X") || arr2[2].contains("O")) {
+                System.out.println("Space is taken.");
+            } 
+            if(!arr2[2].contains("X") && !arr2[2].contains("O")) {
+                System.out.println(myFile.getName1() + " has placed an " + myFile.getLetter1() + " on " + moveOne);
+                arr2[2] = myFile.getLetter1();
+            }
+            break;
+            case 7:
+            if(arr3[0].contains("X") || arr3[0].contains("O")) {
+                System.out.println("Space is taken.");
+            } 
+            if(!arr3[0].contains("X") && !arr3[0].contains("O")) {
+                System.out.println(myFile.getName1() + " has placed an " + myFile.getLetter1() + " on " + moveOne);
+                arr3[0] = myFile.getLetter1();
+            }
+            break;
+            case 8:
+            if(arr3[1].contains("X") || arr3[1].contains("O")) {
+                System.out.println("Space is taken.");
+            } 
+            if(!arr3[1].contains("X") && !arr3[1].contains("O")) {
+                System.out.println(myFile.getName1() + " has placed an " + myFile.getLetter1() + " on " + moveOne);
+                arr3[1] = myFile.getLetter1();
+            }
+            break;
+            case 9:
+            if(arr3[2].contains("X") || arr3[2].contains("O")) {
+                System.out.println("Space is not taken.");
+            } 
+            if(!arr3[2].contains("X") && !arr3[2].contains("O")) {
+                System.out.println(myFile.getName1() + " has placed an " + myFile.getLetter1() + " on " + moveOne);
+                arr3[2] = myFile.getLetter1();
+            }
+        }
+
+    }
+
+    public void checkPlayer2Space() {
+        switch(moveTwo) {
+            case 1:
+            if(arr1[0].contains("X") || arr1[0].contains("O")) {
+                System.out.println("Space is taken.");
+            } 
+            if(!arr1[0].contains("X") && !arr1[0].contains("O")) {
+                System.out.println(myFile.getName2() + " has placed an " + myFile.getLetter2() + " on " + moveTwo);
+            arr1[0] = myFile.getLetter2();
+            }
+            break;  
+            case 2:
+            if(arr1[1].contains("X") || arr1[1].contains("O")) {
+                System.out.println("Space is taken.");
+            } 
+            if(!arr1[1].contains("X") && !arr1[1].contains("O")) {
+                System.out.println(myFile.getName2() + " has placed an " + myFile.getLetter2() + " on " + moveTwo);
+                arr1[1] = myFile.getLetter2();
+            }
+            break;
+            case 3:
+            if(arr1[2].contains("X") || arr1[2].contains("O")) {
+                System.out.println("Space is taken.");
+            } 
+            if(!arr1[2].contains("X") && !arr1[2].contains("O")) {
+                System.out.println(myFile.getName2() + " has placed an " + myFile.getLetter2() + " on " + moveTwo);
+                arr1[2] = myFile.getLetter2();
+            }
+            break;
+            case 4:
+            if(arr2[0].contains("X") || arr2[0].contains("O")) {
+                System.out.println("Space is taken.");
+            } 
+            if(!arr2[0].contains("X") && !arr2[0].contains("O")) {
+                System.out.println(myFile.getName2() + " has placed an " + myFile.getLetter2() + " on " + moveTwo);
+                arr2[0] = myFile.getLetter2();
+            }
+            break;
+            case 5:
+            if(arr2[1].contains("X") || arr2[1].contains("O")) {
+                System.out.println("Space is taken.");
+            } 
+            if(!arr2[1].contains("X") && !arr2[1].contains("O")) {
+                System.out.println(myFile.getName2() + " has placed an " + myFile.getLetter2() + " on " + moveTwo);
+                arr2[1] = myFile.getLetter2();
+            }
+            break;
+            case 6:
+            if(arr2[2].contains("X") || arr2[2].contains("O")) {
+                System.out.println("Space is taken.");
+            } 
+            if(!arr2[2].contains("X") && !arr2[2].contains("O")) {
+                System.out.println(myFile.getName2() + " has placed an " + myFile.getLetter2() + " on " + moveTwo);
+                arr2[2] = myFile.getLetter2();
+            }
+            break;
+            case 7:
+            if(arr3[0].contains("X") || arr3[0].contains("O")) {
+                System.out.println("Space is taken.");
+            } 
+            if(!arr3[0].contains("X") && !arr3[0].contains("O")) {
+                System.out.println(myFile.getName2() + " has placed an " + myFile.getLetter2() + " on " + moveTwo);
+                arr3[0] = myFile.getLetter2();
+            }
+            break;
+            case 8:
+            if(arr3[1].contains("X") || arr3[1].contains("O")) {
+                System.out.println("Space is taken.");
+            } 
+            if(!arr3[1].contains("X") && !arr3[1].contains("O")) {
+                System.out.println(myFile.getName2() + " has placed an " + myFile.getLetter2() + " on " + moveTwo);
+                arr3[1] = myFile.getLetter2();
+            }
+            break;
+            case 9:
+            if(arr3[2].contains("X") || arr3[2].contains("O")) {
+                System.out.println("Space is taken.");
+            } 
+            if(!arr3[2].contains("X") && !arr3[2].contains("O") ) {
+                System.out.println(myFile.getName2() + " has placed an " + myFile.getLetter2() + " on " + moveTwo);
+                arr3[2] = myFile.getLetter2();
+            }
+        } 
+        
+        
+    }
 
 
- public static void main(String[] args) {
-   
-
+    public static void main(String[] args) {
+       myFile.getGameGoing();
     }
 }
